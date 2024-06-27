@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formax</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css"  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-exp.min.css"  />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-icons.min.css"  />
+    <style>
+        .navHeader{
+            position: sticky;
+            z-index: 999;
+            top: -10px;
+            box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
+            background-color:#fff;
+        }
+
+        .mt-6{
+              margin-top: 1.2rem !important;
+        }
+
+        .mt-10{
+              margin-top: 2.0rem !important;
+        }
+    </style>
+
+</head>
+<body>
+    <header class="navbar navHeader">
+        <section class="navbar-section mx-2">
+            <a href="..." class="navbar-brand mr-2">formax</a>
+        </section>
+        <section class="navbar-section mt-2 mb-2 mx-2">
+            <div class="input-group input-inline">
+                <input class="form-input" type="text" placeholder="search">
+                <button class="btn btn-primary input-group-btn">Search</button>
+            </div>
+        </section>
+    </header>
+
+    <!-- Main Content with adjusted layout -->
+    <div class="container mt-10">
+
+        <!-- Adjusted Main Content -->
+            <div class="columns">
+                <div class="column col-3"></div>
+                <div class="column col-6 col-xs-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title h5">{{form['header']}}</div>
+                            <div class="card-subtitle text-gray">{{form['tagline']}}</div>
+                        </div>
+                        <div class="card-body">
+                            {{formHolder}}
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-primary" href="#cards">Submit</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns">
+                <div class="column col-12">
+                    <div class="text-center">
+                        <p>© 2024 Formax</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript">
+            function formPost(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                let form = event.target;
+                let formData = new FormData(form);
+                let jsonObject = {};
+                formData.forEach((value, key) => {
+                    jsonObject[key] = value;
+                });
+
+                fetch(form.action, {
+                    method: form.method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonObject)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Form submitted successfully');
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('Form submission failed');
+                });
+            }
+    </script>
+</body>
+</html>
