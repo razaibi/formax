@@ -1,0 +1,100 @@
+{
+  "backend" : {
+    "model" : "Sample"
+  },
+  "form": {
+    "header": "Sample Form",
+    "tagline" : "A simple form to enter data",
+    "action": "/submit",
+    "method": "POST",
+    "elements": [
+      {
+        "type": "text",
+        "name": "username",
+        "label": "Username",
+        "labelStyle" : "text-primary",
+        "hint": "Sample username.",
+        "placeholder": "Enter your username",
+        "required": true
+      },
+      {
+        "type": "password",
+        "name": "password",
+        "label": "Password",
+        "placeholder": "Enter your password",
+        "required": true
+      },
+      {
+        "type": "date",
+        "name": "startDate",
+        "label": "Start Date",
+        "required": true
+      },
+      {
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      {
+        "type": "select",
+        "name": "program",
+        "label": "Program",
+        "options": [
+          { "value": "program1", "label": "Program 1" },
+          { "value": "program2", "label": "Program 2" }
+        ]
+      },
+      {
+        "type": "select",
+        "name": "games",
+        "label": "Games",
+        "options": [
+          { "value": "pop", "label": "Prince of Persia" },
+          { "value": "tetris", "label": "Tetris" }
+        ],
+        "multiple": "true"
+      },
+      {
+        "type": "radio",
+        "name": "gender",
+        "label": "Gender",
+        "options": [
+          { "value": "male", "label": "Male" },
+          { "value": "female", "label": "Female" }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "name": "rememberMe",
+        "label": "Remember Me"
+      },
+      {
+        "type": "textarea",
+        "name": "sampleContent",
+        "label": "Sample Content",
+        "rows": 4
+      },
+      {
+        "type": "file",
+        "name": "fileupload",
+        "label": "Files",
+        "labelStyle" : "text-primary",
+        "hint": "Upload attachments"
+      },
+      {
+        "type": "color",
+        "name": "formColor",
+        "label": "Form Color",
+        "labelStyle" : "text-primary",
+        "hint": "Select Color"
+      },
+      {
+        "type": "nestedElements",
+        "elements": [
+          
+        ]
+      }
+    ]
+  }
+}
