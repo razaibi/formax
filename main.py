@@ -1,7 +1,7 @@
 import json
 import subprocess
 
-import logic
+from logic import html
 
 def snake_case(name):
     return ''.join(['_' + i.lower() if i.isupper() else i for i in name]).lstrip('_')
@@ -33,15 +33,15 @@ def main():
     f = open(f'data.json')
     json_data = json.load(f)
 
-    html_form = logic.generate_html(json_data)
+    html_form = html.generate_html(json_data)
     new_output = open("index.html", "w")
     new_output.write(html_form)
     new_output.close()
 
-    csharp_class = logic.generate_csharp_class(json_data)
-    new_output = open(f"{json_data["backend"]["model"]}.cs", "w")
-    new_output.write(csharp_class)
-    new_output.close()
+    # csharp_class = logic.generate_csharp_class(json_data)
+    # new_output = open(f"{json_data["backend"]["model"]}.cs", "w")
+    # new_output.write(csharp_class)
+    # new_output.close()
 
     print("Form generation completed.")
     start_server()

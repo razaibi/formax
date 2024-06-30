@@ -2,18 +2,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Formax</title>
+    <title>formax</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre.min.css"  />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-exp.min.css"  />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.4.5/spectre-icons.min.css"  />
     <style>
         .navHeader{
-            position: sticky;
+            position: fixed;
             z-index: 999;
-            top: -10px;
+            width: 100%;
+            top: 0px;
             box-shadow: 0 -6px 10px 5px rgba(0, 0, 0, 0.5);
             background-color:#fff;
+
+        }
+
+        .mx-4 {
+            margin-left: 0.8rem !important;
+            margin-right: 0.8rem !important;
+        }
+
+        .mx-6 {
+            margin-left: 1.2rem !important;
+            margin-right: 1.2rem !important;
         }
 
         .mt-6{
@@ -22,6 +34,88 @@
 
         .mt-10{
               margin-top: 2.0rem !important;
+        }
+        .tile-checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tile-checkbox {
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+        }
+
+        .tile-checkbox input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .tile-checkbox label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .tile-checkbox input:checked + label {
+            border: 1px solid rgb(87, 85, 217);
+            color: rgb(87, 85, 217);
+        }
+
+        .tile-radio-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tile-radio {
+            width: 70px;
+            height: 70px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .tile-radio input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .tile-radio label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .tile-radio input:checked + label {
+            border: 1px solid rgb(87, 85, 217);
+            color: rgb(87, 85, 217);
         }
     </style>
 
@@ -33,7 +127,7 @@
         </section>
         <section class="navbar-section mt-2 mb-2 mx-2">
             <div class="input-group input-inline">
-                <input class="form-input" type="text" placeholder="search">
+                <input class="form-input" type="text" id="search" name="search" placeholder="search">
                 <button class="btn btn-primary input-group-btn">Search</button>
             </div>
         </section>
@@ -46,25 +140,28 @@
             <div class="columns">
                 <div class="column col-3"></div>
                 <div class="column col-6 col-xs-12">
-                    <div class="card">
+                    <div class="card mt-6">
                         <div class="card-header">
                             <div class="card-title h5">{{form['header']}}</div>
                             <div class="card-subtitle text-gray">{{form['tagline']}}</div>
                         </div>
-                        <div class="card-body">
-                            {{formHolder}}
+                        {{formHolder}}
+                        <div id="completeCheck"  class="empty mt-2 d-hide">
+                            <div class="empty-icon"><i class="icon icon-3x icon-check"></i></div>
+                            <p class="empty-title h5">Success</p>
+                            <p class="empty-subtitle">Your have sucessfully submitted.</p>
+                            <div class="empty-action">
+                                <button class="btn btn-primary" id="startAgain">Submit Again</button>
+                            </div>
                         </div>
-                        <div class="card-footer">
-                            <a class="btn btn-primary" href="#cards">Submit</a>
-                        </div>
-
+                        
                     </div>
 
                 </div>
             </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer mt-6">
         <div class="container">
             <div class="columns">
                 <div class="column col-12">
@@ -75,8 +172,14 @@
             </div>
         </div>
     </footer>
-    <script type="text/javascript">
-            function formPost(event) {
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+            
+            const form = document.getElementById('mainForm');
+            const startAgain = document.getElementById('startAgain');
+            
+            form.addEventListener('submit', function(event) {
+                console.log("Hola Senor");
                 event.preventDefault(); // Prevent default form submission
 
                 let form = event.target;
@@ -96,13 +199,22 @@
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
-                    alert('Form submitted successfully');
+                    console.log('Form submitted successfully');
+                    document.getElementById('completeCheck').classList.toggle('d-hide');
+                    form.classList.toggle('d-hide');
+                    form.reset();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                    alert('Form submission failed');
+                    console.error('Form submission failed');
                 });
-            }
+            });
+
+            startAgain.addEventListener('click', function(event) {
+                document.getElementById('completeCheck').classList.toggle('d-hide');
+                form.classList.toggle('d-hide');
+            });
+    });
     </script>
 </body>
 </html>

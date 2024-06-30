@@ -5,55 +5,49 @@
   "form": {
     "header": "Sample Form",
     "tagline" : "A simple form to enter data",
-    "action": "/submit",
+    "action": "http://localhost:3000/user",
     "method": "POST",
     "elements": [
       {
         "type": "text",
-        "name": "username",
-        "label": "Username",
+        "name": "name",
+        "label": "Name",
         "labelStyle" : "text-primary",
-        "hint": "Sample username.",
-        "placeholder": "Enter your username",
+        "hint": "Enter your name without special characters.",
+        "placeholder": "Name",
         "required": true
       },
       {
-        "type": "password",
-        "name": "password",
-        "label": "Password",
-        "placeholder": "Enter your password",
-        "required": true
-      },
-      {
-        "type": "date",
-        "name": "startDate",
-        "label": "Start Date",
+        "type": "number",
+        "name": "age",
+        "label": "Age",
+        "labelStyle" : "text-primary",
+        "hint": "Enter your age.",
+        "placeholder": "Age",
         "required": true
       },
       {
         "type": "email",
         "name": "email",
         "label": "Email",
-        "placeholder": "Enter your email"
+        "labelStyle" : "text-primary",
+        "hint": "Enter your email.",
+        "placeholder": "Email",
+        "required": true
       },
       {
-        "type": "select",
-        "name": "program",
-        "label": "Program",
-        "options": [
-          { "value": "program1", "label": "Program 1" },
-          { "value": "program2", "label": "Program 2" }
+        "type": "checkbox",
+        "name": "rememberMe",
+        "label": "Remember Me"
+      },
+      {
+        "type": "checkbox-tile",
+        "name": "sampleTile",
+        "label": "Checkbox Tiles",
+        "checks": [
+          { "value": "check1", "label": "Check 1" },
+          { "value": "check2", "label": "Check 2" }
         ]
-      },
-      {
-        "type": "select",
-        "name": "games",
-        "label": "Games",
-        "options": [
-          { "value": "pop", "label": "Prince of Persia" },
-          { "value": "tetris", "label": "Tetris" }
-        ],
-        "multiple": "true"
       },
       {
         "type": "radio",
@@ -65,34 +59,12 @@
         ]
       },
       {
-        "type": "checkbox",
-        "name": "rememberMe",
-        "label": "Remember Me"
-      },
-      {
-        "type": "textarea",
-        "name": "sampleContent",
-        "label": "Sample Content",
-        "rows": 4
-      },
-      {
-        "type": "file",
-        "name": "fileupload",
-        "label": "Files",
-        "labelStyle" : "text-primary",
-        "hint": "Upload attachments"
-      },
-      {
-        "type": "color",
-        "name": "formColor",
-        "label": "Form Color",
-        "labelStyle" : "text-primary",
-        "hint": "Select Color"
-      },
-      {
-        "type": "nestedElements",
-        "elements": [
-          
+        "type": "radio-tile",
+        "name": "choices",
+        "label": "Choices",
+        "options": [
+          { "value": "opt1", "label": "1" },
+          { "value": "opt2", "label": "2" }
         ]
       }
     ]
