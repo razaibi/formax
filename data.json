@@ -66,6 +66,27 @@
           { "value": "opt1", "label": "1" },
           { "value": "opt2", "label": "2" }
         ]
+      },
+      {
+        "type": "list-tile",
+        "name": "listTiles",
+        "label": "List Tiles",
+        "labelStyle" : "text-primary mt-2",
+        "items": [
+          { "value": "opt1", "label": "Item 1" },
+          { "value": "opt2", "label": "Item 2" }
+        ]
+      },
+      {
+        "type": "poll",
+        "name": "poll",
+        "label": "Items Poll",
+        "labelStyle" : "mt-2",
+        "totalCount": "7",
+        "items": [
+          { "value": "opt1", "label": "Item 1", "count": "6" },
+          { "value": "opt2", "label": "Item 2", "count": "1"  }
+        ]
       }
     ]
   }

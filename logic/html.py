@@ -115,4 +115,28 @@ def generate_html_element(element):
         html += '</div>'
         html += '</div>'
 
+    elif element_type == 'list-tile':
+        html += f'<div class="form-group">'
+        html += f'<label class="form-label {label_style}">{element['label']}</label>'
+        html += f'<div class="tile-list-container">'
+        for item in element["items"]:
+            html += f'<div class="tile-list-item">{item['label']}</div>'
+        html += '</div>'
+        html += '</div>'
+
+    elif element_type == 'poll':
+        
+        html += f'<div class="form-group">'
+        html += f'<label class="form-label {label_style}">{element['label']}</label>'
+        html += f'<div class="tile-list-container">'
+
+        for item in element["items"]:
+            percentage = 100 * float(item['count'])/float(element['totalCount'])
+            str_percentage = str(percentage) + "%"
+            html += f'<div class="tile-list-item-sm">{item['label']}</div>'
+            html += f"""<div class="bar bar-sm">
+    <div class="bar-item" role="progressbar" style="width:{str_percentage};" aria-valuenow="{str(percentage)}" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>"""
+        html += '</div>'
+        html += '</div>'
     return html
